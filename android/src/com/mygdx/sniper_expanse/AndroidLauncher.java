@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.sniper_expanse.SniperExpanse;
+import com.sniper.expanse.SniperExpanse;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
