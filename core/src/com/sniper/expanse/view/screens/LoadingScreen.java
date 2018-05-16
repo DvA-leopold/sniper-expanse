@@ -13,7 +13,7 @@ import com.sniper.expanse.model.resource.manager.ResourceManager;
 import com.sniper.expanse.utils.MusicManager;
 
 
-final public class LoadingScreen implements Screen {
+public final class LoadingScreen implements Screen {
     @Override
     public void show() {
         batch = ((SniperExpanse) Gdx.app.getApplicationListener()).getMainBatch();
