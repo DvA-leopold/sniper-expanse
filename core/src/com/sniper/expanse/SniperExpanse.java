@@ -20,6 +20,7 @@ public class SniperExpanse extends Game {
 		batch = new SpriteBatch();
 		stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
+//		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		ResourceManager.instance().loadFile("preload_skin/preload_skin.json", true);
 
 		debug = new DebugStatistic(true, true);
@@ -30,8 +31,11 @@ public class SniperExpanse extends Game {
 
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor( 1, 1, 1, 1);
+		Gdx.gl.glClearColor( 0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+
+//		camera.update();
+//		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
 		super.render();
@@ -48,8 +52,8 @@ public class SniperExpanse extends Game {
 		super.dispose();
 		ResourceManager.instance().dispose();
 		MusicManager.instance().dispose();
-		batch.dispose();
 		stage.dispose();
+		batch.dispose();
 	}
 
 	@Override
@@ -82,8 +86,10 @@ public class SniperExpanse extends Game {
 	}
 
 
+//	private Camera camera;
+
+	private Batch batch;
 	private Stage stage;
-	private SpriteBatch batch;
 
 	private DebugStatistic debug;
 }

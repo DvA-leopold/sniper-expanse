@@ -65,7 +65,7 @@ final public class ResourceManager {
      * @param sync if this is true then we will wait till all files are load
      */
     public void loadSection(String section, boolean sync) {
-        FileHandle sectionRoot = Gdx.files.local(section);
+        FileHandle sectionRoot = Gdx.files.internal(section);
         try {
             for (FileHandle file: getFiles(sectionRoot)) {
                 String fileName = file.file().getName();

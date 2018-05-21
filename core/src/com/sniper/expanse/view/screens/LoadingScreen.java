@@ -3,8 +3,6 @@ package com.sniper.expanse.view.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ai.btree.BehaviorTree;
-import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibraryManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -17,11 +15,9 @@ public final class LoadingScreen implements Screen {
     @Override
     public void show() {
         batch = ((SniperExpanse) Gdx.app.getApplicationListener()).getMainBatch();
-        ResourceManager.instance().loadFile("game_skin/game_widget_skin.json", false);
-        ResourceManager.instance().loadSection("audio", false);
+        ResourceManager.instance().loadSection("music", false);
         ResourceManager.instance().loadSection("i18n", false);
-        ResourceManager.instance().loadSection("textures", false);
-        ResourceManager.instance().loadSection("behavior_tree", false);
+        ResourceManager.instance().loadSection("box2d_bodies", false);
 
         final Skin preloadSkin = (Skin) ResourceManager.instance().get("preload_skin/preload_skin.json");
         progressBar = new ProgressBar(0, 100, 1, true, preloadSkin);
@@ -43,10 +39,10 @@ public final class LoadingScreen implements Screen {
         if (progress == 100) {
             MusicManager.instance().initialize();
             // TODO refactor. move to btree loader
-            BehaviorTreeLibraryManager.getInstance().getLibrary().registerArchetypeTree(
-                    "villainAI",
-                    (BehaviorTree) ResourceManager.instance().get("behavior_tree/villain.btree")
-            );
+//            BehaviorTreeLibraryManager.getInstance().getLibrary().registerArchetypeTree(
+//                    "villainAI",
+//                    (BehaviorTree) ResourceManager.instance().get("behavior_tree/villain.btree")
+//            );
             ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen());
         }
     }

@@ -51,7 +51,7 @@ final public class SkinWithGeneratedFreeTypeFontLoader extends SkinLoader {
         final FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal(fileName));
         final FreetypeFontLoader.FreeTypeFontLoaderParameter parameter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parameter.fontFileName = fileName;
-        parameter.fontParameters.size = Gdx.graphics.getHeight() * 16 / Gdx.graphics.getWidth();
+        parameter.fontParameters.size = Gdx.graphics.getWidth() * 16 / Gdx.graphics.getHeight();
         parameter.fontParameters.color = Color.BLACK;
         parameter.fontParameters.borderColor = Color.WHITE;
         parameter.fontParameters.borderWidth = 1;

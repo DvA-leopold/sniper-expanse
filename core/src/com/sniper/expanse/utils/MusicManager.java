@@ -23,8 +23,8 @@ final public class MusicManager {
     }
 
     public void initialize() {
-        mainSample = (Music) ResourceManager.instance().get("audio/music/The Complex.mp3");
-        additionSample = (Music) ResourceManager.instance().get("audio/music/Undaunted.mp3");
+        mainSample = (Music) ResourceManager.instance().get("music/The Complex.mp3");
+        additionSample = (Music) ResourceManager.instance().get("music/Undaunted.mp3");
 
         musicManagerStarted = true;
         Class<? extends Screen> startScreen = ((Game) Gdx.app.getApplicationListener()).getScreen().getClass();
