@@ -2,6 +2,7 @@ package com.sniper.expanse.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.sniper.expanse.model.bodies.CollisionListener;
 import com.sniper.expanse.model.bodies.Sniper;
 import com.sniper.expanse.model.bodies.Updatable;
 
@@ -16,15 +17,15 @@ final public class Scene {
     public Scene() {
         debugRenderer = new Box2DDebugRenderer();
 
-        world = new World(new Vector2(0, 9.8f), false);
+        world = new World(new Vector2(0, 0), false);
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
                 try {
-                    ((Updatable) contact.getFixtureA().getBody().getUserData())
+                    ((CollisionListener) contact.getFixtureA().getBody().getUserData())
                             .collisionContact(contact.getFixtureB().getBody());
 
-                    ((Updatable) contact.getFixtureB().getBody().getUserData())
+                    ((CollisionListener) contact.getFixtureB().getBody().getUserData())
                             .collisionContact(contact.getFixtureA().getBody());
                 } catch (Exception err) {
                     System.err.println("collision contact: " + err.getMessage());
@@ -53,7 +54,9 @@ final public class Scene {
     }
 
     public void update(float delta) {
-//        debugRenderer.render(world, ((SniperExpanse) Gdx.app.getApplicationListener()).getStage().getCamera().combined);
+//        debugRenderer.render(world, ((SniperExpanse) Gdx.app.getApplicationListener()).getWidgetsHolder().getCamera().combined);
+
+        world.step(1/60f, 6, 2);
 
         for (Updatable body: sceneBodies) {
             body.update(delta);

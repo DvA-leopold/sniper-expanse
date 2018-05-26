@@ -1,7 +1,7 @@
 package com.sniper.expanse.view.screens;
 
 import com.badlogic.gdx.Screen;
-import com.sniper.expanse.model.GameStates;
+import com.sniper.expanse.model.GameStateHolder;
 import com.sniper.expanse.model.Scene;
 
 
@@ -41,17 +41,9 @@ final class GameScreen implements Screen {
     @Override
     public void dispose() {
         scene.dispose();
-    }
-
-    public static void changeState(GameStates newGameState) {
-        gameState = newGameState;
-    }
-
-    public static GameStates getState() {
-        return gameState;
+        GameStateHolder.dispose();
     }
 
 
     private Scene scene;
-    private static GameStates gameState;
 }

@@ -1,9 +1,8 @@
 package com.sniper.expanse;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,20 +12,24 @@ import com.sniper.expanse.utils.DebugStatistic;
 import com.sniper.expanse.utils.MusicManager;
 import com.sniper.expanse.view.screens.LoadingScreen;
 
+import static com.sniper.expanse.utils.Constants.PTM_RATIO;
+
 
 public class SniperExpanse extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
-//		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		ResourceManager.instance().loadFile("preload_skin/preload_skin.json", true);
+		final float width= Gdx.graphics.getWidth() / PTM_RATIO;
+		final float height = Gdx.graphics.getHeight() / PTM_RATIO;
+		camera = new OrthographicCamera(width, height);
+		camera.setToOrtho(false, width, height);
 
+		widgetsHolder = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 		debug = new DebugStatistic(true, true);
-		((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen());
 
-		Gdx.input.setInputProcessor(stage);
+		Gdx.input.setInputProcessor(new InputMultiplexer(widgetsHolder));
+		setScreen(new LoadingScreen());
 	}
 
 	@Override
@@ -34,15 +37,15 @@ public class SniperExpanse extends Game {
 		Gdx.gl.glClearColor( 0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-//		camera.update();
-//		batch.setProjectionMatrix(camera.combined);
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
 		super.render();
 		batch.end();
 
-		stage.act();
-		stage.draw();
+		widgetsHolder.act();
+		widgetsHolder.draw();
 
 		debug.act();
 	}
@@ -52,7 +55,7 @@ public class SniperExpanse extends Game {
 		super.dispose();
 		ResourceManager.instance().dispose();
 		MusicManager.instance().dispose();
-		stage.dispose();
+		widgetsHolder.dispose();
 		batch.dispose();
 	}
 
@@ -81,15 +84,15 @@ public class SniperExpanse extends Game {
 		return batch;
 	}
 
-	public Stage getStage() {
-		return stage;
+	public Stage getWidgetsHolder() {
+		return widgetsHolder;
 	}
 
 
-//	private Camera camera;
-
 	private Batch batch;
-	private Stage stage;
+	private Stage widgetsHolder;
+
+	private OrthographicCamera camera;
 
 	private DebugStatistic debug;
 }

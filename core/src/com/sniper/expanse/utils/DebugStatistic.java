@@ -12,7 +12,8 @@ import com.sniper.expanse.model.resource.manager.ResourceManager;
 
 final public class DebugStatistic {
     public DebugStatistic(boolean drawFpsStat, boolean drawVersionStat) {
-        final Stage stage = ((SniperExpanse) Gdx.app.getApplicationListener()).getStage();
+        final Stage stage = ((SniperExpanse) Gdx.app.getApplicationListener()).getWidgetsHolder();
+        ResourceManager.instance().loadFile("preload_skin/preload_skin.json", true);
         final Skin skin = (Skin) ResourceManager.instance().get("preload_skin/preload_skin.json");
 
         fpsLabel = new Label("fps:" + Gdx.graphics.getFramesPerSecond(), skin);
