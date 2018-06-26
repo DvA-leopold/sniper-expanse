@@ -13,8 +13,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import static com.sniper.expanse.utils.Constants.PTM_RATIO;
-
 
 final public class SkinWithGeneratedFreeTypeFontLoader extends SkinLoader {
     public SkinWithGeneratedFreeTypeFontLoader(FileHandleResolver resolver) {

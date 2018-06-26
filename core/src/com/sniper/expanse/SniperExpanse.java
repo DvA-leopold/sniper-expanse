@@ -91,8 +91,6 @@ public class SniperExpanse extends Game {
 
 	private Batch batch;
 	private Stage widgetsHolder;
-
 	private OrthographicCamera camera;
-
 	private DebugStatistic debug;
 }
